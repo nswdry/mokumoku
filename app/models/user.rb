@@ -2,7 +2,6 @@
 
 class User < ApplicationRecord
   authenticates_with_sorcery!
-  GENDERS = %w[man woman other]
 
   has_many :events, dependent: :destroy
   has_many :event_attendances, dependent: :destroy
@@ -20,7 +19,8 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
 
   validates :email, uniqueness: true
-  validates :gender, presence: true, inclusion: { in: GENDERS }
+  validates :gender, presence: true
+  enum gender: { other: 0, man: 1, woman: 2 }
 
   scope :allowing_created_event_notification,
         -> { joins(:notification_timings).merge(NotificationTiming.created_event) }
