@@ -10,6 +10,7 @@ class Event < ApplicationRecord
   has_many :attendees, through: :attendances, class_name: 'User', source: :user
   has_many :bookmarks, dependent: :destroy
   has_one_attached :thumbnail
+  enum gender_restriction: { everyone: 0, woman_only: 1, man_only: 2 }
 
   scope :future, -> { where('held_at > ?', Time.current) }
   scope :past, -> { where('held_at <= ?', Time.current) }
