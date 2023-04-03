@@ -1,4 +1,11 @@
 ja:
+  activerecord:
+    attributes:
+      event:
+        gender_restriction:
+          everyone: 全員
+          only_woman: 女性限定
+          only_man: 男性限定
   enums:
     notification_timing:
       timing:
@@ -11,3 +18,9 @@ ja:
         other: その他
         man: 男性
         woman: 女性
+    event:
+        gender_restriction:
+          everyone: 全員
+          only_woman: 女性限定
+          only_man: 男性限定
+

@@ -18,12 +18,11 @@
   </div>
   <% if current_user&.woman? %>
     <div class="mb-3">
-    <%= f.label :gender %><br>
-      <%= f.check_box :woman_only, class: "form-check-input" %>
-      <%= f.label :gender_restriction, "Only woman", class: "form-check-label" %>
+    <%= f.check_box :gender_restriction, { multiple: false }, :only_woman, nil %>
+    <%= f.label :only_woman %>
   <% elsif current_user&.man? %>
-      <%= f.check_box :man_only, class: "form-check-input" %>
-      <%= f.label :gender_restriction, "Only man", class: "form-check-label" %>
+      <%= f.check_box :gender_restriction, { multiple: false }, :only_man, nil %>
+    <%= f.label :only_man %>
     </div>
   <% end %>
   <div class="mb-3">

@@ -10,7 +10,7 @@ class Event < ApplicationRecord
   has_many :attendees, through: :attendances, class_name: 'User', source: :user
   has_many :bookmarks, dependent: :destroy
   has_one_attached :thumbnail
-  enum gender_restriction: { everyone: 0, woman_only: 1, man_only: 2 }
+  enum gender_restriction: { everyone: 0, only_woman: 1, only_man: 2 }
 
   scope :future, -> { where('held_at > ?', Time.current) }
   scope :past, -> { where('held_at <= ?', Time.current) }
@@ -27,5 +27,13 @@ class Event < ApplicationRecord
 
   def future?
     !past?
+  end
+
+  def only_woman=(value)
+  self.gender_restriction = :only_woman if ActiveRecord::Type::Boolean.new.cast(value)
+  end
+
+  def only_man=(value)
+  self.gender_restriction = :only_man if ActiveRecord::Type::Boolean.new.cast(value)
   end
 end
