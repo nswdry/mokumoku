@@ -93,12 +93,25 @@
                               data: { confirm: 'キャンセルします' }
                   %>
                 <% else %>
-                  <%= link_to 'このもくもく会に参加する',
-                              event_attendance_url(@event),
-                              class: 'btn btn-primary',
-                              method: :post,
-                              data: { confirm: '申し込みます' }
-                  %>
+                  <% if @event.gender_restriction == 'only_woman' %>
+                    <% if current_user.present? && current_user.woman? %>
+                      <%= link_to 'このもくもく会に参加する',
+                                  event_attendance_url(@event),
+                                  class: 'btn btn-primary',
+                                  method: :post,
+                                  data: { confirm: '申し込みます' }
+                      %>
+                    <% else %>
+                      <p>このイベントは女性限定です。</p>
+                    <% end %>
+                  <% else %>
+                    <%= link_to 'このもくもく会に参加する',
+                                event_attendance_url(@event),
+                                class: 'btn btn-primary',
+                                method: :post,
+                                data: { confirm: '申し込みます' }
+                    %>
+                  <% end %>
                 <% end %>
               <% end %>
             <% end %>
