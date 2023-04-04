@@ -82,6 +82,11 @@
             <%= l @event.held_at, format: :short %>
           </h4>
           <hr />
+          <% if @event.only_woman? %>
+          <p class="text-center">このイベントは女性限定です。</p>
+          <% else @event.only_man? %>
+            <p class="text-center">このイベントは男性限定です。</p>
+          <% end %>
           <div class="text-center">
             <% if logged_in? %>
               <% if !current_user.owner?(@event) %>
@@ -94,7 +99,6 @@
                   %>
                 <% else %>
                   <% if @event.gender_restriction == 'only_woman' %>
-                    <p>このイベントは女性限定です。</p>
                     <% if current_user.present? && current_user.woman? %>
                       <%= link_to 'このもくもく会に参加する',
                                   event_attendance_url(@event),
@@ -102,8 +106,6 @@
                                   method: :post,
                                   data: { confirm: '申し込みます' }
                       %>
-                    <% else %>
-                      <p>このイベントは女性限定です。</p>
                     <% end %>
                   <% else %>
                     <%= link_to 'このもくもく会に参加する',
