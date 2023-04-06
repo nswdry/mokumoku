@@ -20,6 +20,16 @@
         </div>
       </div>
       <hr />
+      <% if event.only_woman? %>
+        <span class="badge bg-danger">女性限定</span>
+        <hr />
+      <% elsif event.only_man? %>
+        <span class="badge bg-primary">男性限定</span>
+        <hr />
+      <% else %>
+        <span class="badge bg-success">全員</span>
+        <hr />
+      <% end %>
       <div class="d-flex align-items-center justify-content-between">
         <div class="d-flex align-items-center gap-3">
           <%= image_tag event.user.decorate.avatar, class: 'avatar-sm rounded-circle' %>

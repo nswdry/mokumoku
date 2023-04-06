@@ -16,6 +16,17 @@
     <%= f.label :prefecture_id %>
     <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name, {}, class: 'form-select' %>
   </div>
+  <% if current_user.woman? %>
+    <div class="mb-3">
+      <%= f.check_box :gender_restriction, { multiple: false, id: 'event_only_woman' }, 'only_woman', nil %>
+      <%= f.label :only_woman %>
+    </div>
+  <% elsif current_user.man? %>
+    <div class="mb-3">
+      <%= f.check_box :gender_restriction, { multiple: false }, 'only_man', { id: :only_man }, nil %>
+      <%= f.label :only_man %>
+    </div>
+  <% end %>
   <div class="mb-3">
     <%= f.label :thumbnail %>
     <%= f.file_field :thumbnail, class: 'form-control js-file-select-preview mb-3', accept: 'image/*', data: { target: '#preview-target' } %>

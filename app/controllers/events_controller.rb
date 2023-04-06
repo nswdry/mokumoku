@@ -46,6 +46,9 @@ class EventsController < ApplicationController
 
   def edit
     @event = current_user.events.find(params[:id])
+    return if @event.gender_restriction == 'only_woman' && current_user&.woman?
+
+    redirect_to root_path, alert: '編集権限がありません。' unless @event
   end
 
   def update
@@ -60,6 +63,6 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:title, :content, :held_at, :prefecture_id, :thumbnail)
+    params.require(:event).permit(:title, :content, :held_at, :prefecture_id, :gender_restriction, :thumbnail)
   end
 end
