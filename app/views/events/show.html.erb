@@ -83,7 +83,7 @@
           </h4>
           <hr />
           <% if @event.only_woman? %>
-          <p class="text-center">このイベントは女性限定です。</p>
+            <p class="text-center">このイベントは女性限定です。</p>
           <% else @event.only_man? %>
             <p class="text-center">このイベントは男性限定です。</p>
           <% end %>
@@ -98,7 +98,7 @@
                               data: { confirm: 'キャンセルします' }
                   %>
                 <% else %>
-                  <% if @event.gender_restriction == 'only_woman' %>
+                  <% if @event.only_woman? %>
                     <% if current_user.present? && current_user.woman? %>
                       <%= link_to 'このもくもく会に参加する',
                                   event_attendance_url(@event),

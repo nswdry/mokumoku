@@ -46,9 +46,8 @@ class EventsController < ApplicationController
 
   def edit
     @event = current_user.events.find(params[:id])
-    if @event.gender_restriction == 'only_woman' && current_user&.woman?
-      return
-    end
+    return if @event.gender_restriction == 'only_woman' && current_user&.woman?
+
     redirect_to root_path, alert: '編集権限がありません。' unless @event
   end
 

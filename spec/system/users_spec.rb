@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Users", type: :system do
+RSpec.describe 'Users', type: :system do
   describe 'Sign up関係' do
     context '成功系' do
       it 'Sign upを行い、ログイン処理を行うとイベント一覧ページにリダイレクトされる。' do

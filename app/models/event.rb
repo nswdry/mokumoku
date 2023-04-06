@@ -30,10 +30,6 @@ class Event < ApplicationRecord
   end
 
   def only_woman=(value)
-  self.gender_restriction = :only_woman if ActiveRecord::Type::Boolean.new.cast(value)
-  end
-
-  def only_man=(value)
-  self.gender_restriction = :only_man if ActiveRecord::Type::Boolean.new.cast(value)
+    self.gender_restriction = :only_woman if ActiveRecord::Type::Boolean.new.cast(value)
   end
 end
